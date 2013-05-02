@@ -73,7 +73,7 @@ Status ListDelete_Sq(SqList &L,int i,ElemType &e)
 	return OK;
 
 }
-void DestroyList(SqList &L)
+void DestroyList_Sq(SqList &L)
 {
 //释放顺序表L所占的存储空间
 	free(L.elem);

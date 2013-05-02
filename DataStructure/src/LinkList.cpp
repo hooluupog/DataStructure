@@ -46,7 +46,7 @@ Status ListDelete_L(LinkList &L,int i,ElemType &e)
 	free(q);
 	return OK;
 }
-void DestroyList(LinkList &L)
+void DestroyList_L(LinkList &L)
 //销毁链表
 {
 	LinkList p;

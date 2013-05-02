@@ -30,6 +30,6 @@ Status InitList_Sq(SqList &L);//初始化一个空的线性表
 Status Create_SqList(SqList &L,int n);//创建一个线性表
 Status ListInsert_Sq(SqList &L,int i,ElemType e);//在顺序线性表L的第i个元素之前插入新元素e
 Status ListDelete_Sq(SqList &L,int i,ElemType &e);//在顺序线性表L中删除第i个元素，并用e返回其值
-void DestroyList(SqList &L);//释放顺序表L所占的存储空间
+void DestroyList_Sq(SqList &L);//释放顺序表L所占的存储空间
 int LocateElem_Sq(SqList L,ElemType e);//在顺序表中查找第一个值为e的元素的位序
 #endif
