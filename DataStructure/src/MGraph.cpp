@@ -10,7 +10,7 @@ Status CreateGraph(MGraph &G){
     //G.kind---- 0:DG 1:DN 2:UDG 3:UDN
     scanf("%d%d%d\n",&G.vexnum,&G.arcnum,&G.kind);
     if(G.kind > 3 || G.kind < 0){
-        Error(" Incorrect graph kind input. the legal number must between 0 and 4.");
+        Error(" Incorrect graph kind input. the legal number must between 0 and 3.");
         return ERROR;
     }
     for(i = 0; i < G.vexnum; i++) {// Construct vertex nodes and init adjacent matrix.
