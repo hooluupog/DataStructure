@@ -1,0 +1,8 @@
+Algorithm_SingleFile
+这个目录与DataStructure项目无关，不会影响DataStructure项目的编译和运行。放在这里主要是为了git同步方便。
+这个目录中存放不依赖外部头文件(除了标准库)的算法源码，它是一个单文件的，完整的，可执行的算法实现。
+每个文件可以单独通过vim编辑，在命令行中编译运行验证算法的正确性。
+
+
+
+而依赖于DataStructure头文件的算法代码放置在DataStructure/src目录中。
