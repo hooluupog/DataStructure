@@ -7,11 +7,11 @@ typedef int Status;
 #define ERROR 0
 #define LIST_INIT_SIZE 100
 #define LISTINCREMENT 10
-struct SqList{
+typedef struct SqList{
 ElemType *elem;//存储空间基址
 int length;//表长
 int listSize;//当前分配的存储容量(以sizeof(ELemType)为单位)
-};
+}SqList;
 
 /*注意：如果把struct的定义放在cpp文件中，h文件中只放struct的声明，则需要：
 **typedef struct SqList *ListPtr;

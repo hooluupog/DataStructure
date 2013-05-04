@@ -1,5 +1,6 @@
 #include  "SqList.h"
 #include "stdio.h"
+#include "algorithm.h"
 
 void invert(SqList L,int s,int t){
 	//将顺序表中下标s至t的元素逆转
@@ -22,8 +23,9 @@ void testSqList() {
 	freopen("input/SqList.txt","r",stdin);
 	printf("SqList test: \n");
 	ElemType e;
-	SqList L;
+	SqList L,H;
 	Create_SqList(L, 10);
+	Create_SqList(H, 10);
 	ListInsert_Sq(L, 5, 20);
 	for (int i = 0; i < L.length; ++i)
 		printf("%d ", L.elem[i]);
@@ -35,7 +37,20 @@ void testSqList() {
 	printf("\n%d\n", result);
 	exchange(L,3,L.length-3);
 	for (int i = 0; i < L.length; ++i)
-			printf("%d ", L.elem[i]);
+	{
+		H.elem[i] = L.elem[i];
+		printf("%d ", L.elem[i]);
+	}
 	printf("\n");
+	Qsort(L,0,L.length-1);
+	printf("Quick sort:\n");
+	for (int i = 0; i < L.length; ++i)
+		printf("%d ", L.elem[i]);
+	printf("\n");
+	HeapSort(H);
+	printf("Heap sort:\n");
+		for (int i = 0; i < H.length; ++i)
+			printf("%d ", H.elem[i]);
+		printf("\n");
 }
 
