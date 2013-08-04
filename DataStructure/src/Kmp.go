@@ -13,7 +13,7 @@ func Kmp(sstring string,pstring string,next []int) int {
 	return i - len(pstring)
 }
 
-func Get_next(pstring string,next []int) []int {
+func Get_next(pstring string) []int {
 	next := make([]int, len(pstring))
 	next[0] = -1
 	for i, j := 0, -1; i < len(pstring)-1; {
