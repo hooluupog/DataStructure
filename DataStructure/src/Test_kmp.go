@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-  sstring := "acabaabaabcacaabc"
+        sstring := "acabaabaabcacaabc"
 	pstring := "abaabcac"
-  next := make([]int,len(pstring))
-	next = kmp.Get_next(pstring,next)
+        next := make([]int,len(pstring))
+	next = kmp.Get_next(pstring)
 	fmt.Printf("The matching postion is : %d\n",kmp.Kmp(sstring, pstring,next))
 }
