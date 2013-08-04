@@ -1,8 +1,6 @@
 package kmp
 
-var next []int
-
-func kmp(sstring, pstring string) int {
+func Kmp(sstring string,pstring string,next []int) int {
   i, j := 0, 0
 	for i < len(sstring) && j < len(pstring) {
 		if j == -1 || sstring[i] == pstring[j] {
@@ -15,7 +13,7 @@ func kmp(sstring, pstring string) int {
 	return i - len(pstring)
 }
 
-func get_next(pstring string) []int {
+func Get_next(pstring string,next []int) []int {
 	next := make([]int, len(pstring))
 	next[0] = -1
 	for i, j := 0, -1; i < len(pstring)-1; {
