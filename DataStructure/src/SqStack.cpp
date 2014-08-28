@@ -22,7 +22,7 @@ Status GetTop_Sq(SqStack s,ElemType &e)
 		return OK;
 	}
 }
-Status Push_Sq(SqStack s,ElemType e)
+Status Push_Sq(SqStack &s,ElemType e)
 //入栈
 {
 	if(s->top == STACK_SIZE-1)
