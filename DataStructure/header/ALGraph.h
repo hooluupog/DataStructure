@@ -38,5 +38,6 @@ void DFS(ALGraph &G,int v); // depth-first search
 Status DFSTraverse(ALGraph G); // depth-first traverse
 Status BFSTraverse(ALGraph G); // breadth-first traverse based on queue
 void visit(ALGraph G,int v); // visit graphic node
+void FindInDegree(ALGraph G,char indegree[]); //indegree
 
 #endif

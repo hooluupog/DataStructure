@@ -20,3 +20,9 @@ void testBinTree();
 void testMGraph();
 //ALGraph
 void testALGraph();
+//Dijkstra
+void test_DIJ();
+//Floyd
+void test_FLOYD();
+//TopoSort
+void test_TopoSort();

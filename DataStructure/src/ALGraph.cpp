@@ -138,3 +138,16 @@ Status BFSTraverse(ALGraph G) {
 void visit(ALGraph G,int v) {
     printf("%c\n",G.vertices[v].data);
 }
+
+// find indegree
+void FindInDegree(ALGraph G,char indegree[]){
+	ArcNode *p;
+	for(int v = 0; v < G.vexnum;++v){
+		indegree[v] = 0;
+	}
+	for(int v = 0; v < G.vexnum;++v){
+		for(p = G.vertices[v].firstarc;p != NULL; p = p->nextarc){
+			indegree[p->adjvex]++;
+		}
+	}
+}

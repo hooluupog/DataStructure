@@ -34,5 +34,6 @@ Status BFSTraverse(MGraph G); // breadth-first traverse based on queue
 void DFS(MGraph &G,int v); // depth-first search
 Status DFSTraverse(MGraph G); // depth-first traverse
 void visit(MGraph G,int v); // visit graphic node
+void clearGraph(MGraph &G); // reset visit status
 
 #endif
