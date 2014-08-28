@@ -14,7 +14,7 @@ typedef struct Stack{
 
 Status InitStack_Sq(SqStack &s);//栈初始化
 Status GetTop_Sq(SqStack s,ElemType &e);//返回栈顶元素到e中
-Status Push_Sq(SqStack &s,ElemType e);//入栈
+Status Push_Sq(SqStack s,ElemType e);//入栈
 Status Pop_Sq(SqStack s,ElemType &e);//出栈
 void printStack_Sq(SqStack s);
 Status IsEmpty_Sq(SqStack s);

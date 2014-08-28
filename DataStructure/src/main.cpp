@@ -1,6 +1,6 @@
 #include "test.h"
-int main(){
-	/*
+int main()
+{
 	//LinkList
 	testLinkList();
 	//SqList
@@ -21,12 +21,5 @@ int main(){
     testMGraph();
     //ALGraph
     testALGraph();
-    */
-    //Dijkstra
-    test_DIJ();
-    //FLOYD
-    test_FLOYD();
-    //TopoLogicalSort
-    test_TopoSort();
 	return 0;
 }

@@ -124,9 +124,3 @@ Status BFSTraverse(MGraph G) {
 void visit(MGraph G,int v) {
     printf("%c\n",G.vex[v]);
 }
-
-void clearGraph(MGraph &G){
-	for(int w = 0; w < G.vexnum;++w){
-		G.visit[w] = 0;
-	}
-}
