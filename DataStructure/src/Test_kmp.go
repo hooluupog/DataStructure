@@ -1,13 +1,14 @@
 package main
+
 import (
-    "fmt"
-    "kmp"
+	"fmt"
+	"kmp"
 )
 
 func main() {
-        sstring := "acabaabaabcacaabc"
-	pstring := "abaabcac"
-        next := make([]int,len(pstring))
+	sstring := "aabacaabaabaadaabaaeaa"
+	pstring := "aabaa"
+	next := make([]int, len(pstring))
 	next = kmp.Get_next(pstring)
-	fmt.Printf("The matching postion is : %d\n",kmp.Kmp(sstring, pstring,next))
+	fmt.Printf("The matching postion  : %v\n", kmp.Kmp(sstring, pstring, next))
 }
