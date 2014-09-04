@@ -35,7 +35,7 @@ void kmp_match(char* s,int sLen,char* p,int pLen)
       {
 	printf("移动%d位，发生第%d次匹配\n",i-pLen+1,++k); //匹配成功
     mark = 1;
-    j = next[j]; //寻找下一次匹配
+    j = 0; //寻找下一次匹配
       }
   }
   if(mark == 0)
