@@ -1,18 +1,18 @@
 package kmp
 
 func Kmp(sstring string, pstring string, next []int) []int {
-	i, j := 0, 0
+	i, j := 1, 0
 	s := []int{} // sucess paterning posistions.
 	for i < len(sstring) && len(pstring) <= len(sstring) {
-		if j == -1 || sstring[i] == pstring[j] {
+		if j == -1 || sstring[i-1] == pstring[j] {
 			i++
 			j++
 		} else {
 			j = next[j]
 		}
-		if j == len(pstring) {
+		if j == len(pstring)-1 && sstring[i-1] == pstring[j] {
 			s = append(s, i-len(pstring))
-			j = next[j-1] + 1 // next round paterning start position.
+			j = next[j] // next round paterning start position.
 		}
 	}
 	return s
