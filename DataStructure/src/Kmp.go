@@ -1,7 +1,7 @@
 package kmp
 
 func Kmp(sstring string, pstring string, next []int) []int {
-	i, j := 0, -1
+	i, j := 0, 0
 	s := []int{} // sucess paterning posistions.
 	for i < len(sstring) && len(pstring) <= len(sstring) {
 		if j == -1 || sstring[i] == pstring[j] {
@@ -12,7 +12,7 @@ func Kmp(sstring string, pstring string, next []int) []int {
 		}
 		if j == len(pstring) {
 			s = append(s, i-len(pstring))
-			j = next[j-1]
+			j = next[j-1] + 1 // next round paterning start position.
 		}
 	}
 	return s
@@ -21,11 +21,11 @@ func Kmp(sstring string, pstring string, next []int) []int {
 func Get_next(pstring string) []int {
 	next := make([]int, len(pstring))
 	next[0] = -1
-	for i, j := 1, -1; i < len(pstring); {
+	for i, j := 0, -1; i < len(pstring)-1; {
 		if j == -1 || pstring[i] == pstring[j] {
+			i++
 			j++
 			next[i] = j
-			i++
 		} else {
 			j = next[j]
 		}
