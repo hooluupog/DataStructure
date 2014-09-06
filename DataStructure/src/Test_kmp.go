@@ -26,7 +26,7 @@ func main() {
 				log.Fatal(err)
 			}
 		}
-		next := make([]int, len(p))
+		next := make([]int, len(p)+1)
 		next = kmp.Get_next(p)
 		fmt.Printf("The matching postion  : %v\n", kmp.Kmp(s, p, next))
 	}
