@@ -39,3 +39,4 @@ func main() {
 		fmt.Scanf("%d", &num[i])
 	}
 	combination(num, 0, result)
+}
