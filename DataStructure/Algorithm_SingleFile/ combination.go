@@ -1,6 +1,6 @@
 // sample input
 // 3
-// 1 2 3
+// 1 2 3 
 //
 //sample output
 // 1 2 3
