@@ -14,29 +14,47 @@ package main
 
 import "fmt"
 
-func combination(num []int, n int, result []int) {
-	for i := n; i < len(num); i++ {
-		// use temp to save the origin sequence.
-		temp := make([]int, len(num)-n)
-		copy(temp, num[n:])
-		num[n], num[i] = num[i], num[n]
-		result[n] = num[n]
-		if n == len(num)-1 {
-			fmt.Println(result)
+func isSwap(num []int, start, end int) bool {
+	for i := start; i < end; i++ {
+		if num[i] == num[end] {
+			return false
 		}
-		combination(num, n+1, result)
-		//recover sequence.
-		copy(num[n:], temp)
+	}
+	return true
+}
+
+func combination(num []int, n int) {
+	if n == len(num)-1 {
+		fmt.Println(num)
+		return
+	}
+	for i := n; i < len(num); i++ {
+		temp := make([]int, len(num)-n)
+		if n == i {
+			combination(num, n+1)
+		} else {
+			// do not swap same elements
+			if !isSwap(num, n, i) {
+				continue
+			} else {
+				// use temp to save the origin sequence.
+				copy(temp, num[n:])
+				num[n], num[i] = num[i], num[n]
+				combination(num, n+1)
+				// recover sequence.
+				copy(num[n:], temp)
+			}
+		}
 	}
 }
+
 func main() {
 	var n int
-	var num, result []int
+	var num []int
 	fmt.Scanln(&n)
 	num = make([]int, n)
-	result = make([]int, n)
 	for i := 0; i < n; i++ {
 		fmt.Scanf("%d", &num[i])
 	}
-	combination(num, 0, result)
+	combination(num, 0)
 }
