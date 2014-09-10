@@ -30,7 +30,7 @@ func password(s string) {
 			i++
 			j++
 			next[i] = j
-			count[j+1]++
+			count[j]++
 		} else {
 			j = next[j]
 		}
@@ -40,7 +40,7 @@ func password(s string) {
 	// 1)该子串出现的次数(匹配次数)大于1，说明其必为中缀；
 	// 2)该子串出现次数不大于1，则考察next[next[len(s)]]，如果大于0，
 	// 则s[0:next[next[len(s)]]]必为最长中缀,同时也是前缀和后缀。
-	if count[next[len(s)]+1] > 1 {
+	if count[next[len(s)]] > 1 {
 		s = s[:(next[len(s)])]
 	} else {
 		s = s[:(next[next[len(s)]])]
