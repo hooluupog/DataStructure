@@ -6,18 +6,12 @@ import (
 	"runtime"
 )
 
-var (
-	pre []int
-	in  []int
-)
+var pre,in []int
 
 func postOrder(pstart, istart int, n int, isRoot bool) {
-	if n < 1 {
-		return
-	}
+	if n < 1 { return }
 	i := 0
-	for ; pre[pstart] != in[istart+i]; i++ {
-	}
+	for ; pre[pstart] != in[istart+i]; i++ {}
 	postOrder(pstart+1, istart, i, false)
 	postOrder(pstart+1+i, istart+i+1, n-i-1, false)
 	if isRoot {
@@ -31,7 +25,6 @@ func main() {
 	var n int
 	for {
 		_, err := fmt.Scanln(&n)
-		//fmt.Println(err)
 		if err == io.EOF {
 			break
 		}
@@ -44,10 +37,9 @@ func main() {
 			fmt.Scan(&in[i])
 		}
 		if runtime.GOOS == "windows" {
-			// on windows,it uses '\r\n' as newline,but Go nowadays
-			// uses unix's method('\n' as newline).So we need read
-			// "\r" before read newline's data.
-			var r byte //receive '\r' delim.
+			// on windows,it uses '\r\n' as newline,but Go nowadays uses unix's method('\n' as newline).
+			// So we need read "\r" before read newline's data.
+			var r byte // receive '\r' delim.
 			fmt.Scan(&r)
 		}
 		postOrder(0, 0, n, true)
