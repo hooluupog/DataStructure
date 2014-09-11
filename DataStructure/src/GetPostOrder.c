@@ -3,10 +3,7 @@
 int pre[SIZE],in[SIZE];
 void postOrder(int pstart,int istart,int n,int isRoot){
 	int i;
-	if(n == 1){// left or right tree with one node.
-		printf("%d ",pre[pstart]);
-		return;
-	}else if (n < 1) return;
+	if (n < 1) return;
 	for(i=0;pre[pstart] != in[istart+i];i++);//find the position of root
 	// node which divides tree into two subtrees in inorder list.
 	// traverse the left and right subtrees.
