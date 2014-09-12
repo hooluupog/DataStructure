@@ -96,9 +96,9 @@ func CreateBinTree(tree *BinTree, level string, in string) {
 				t.lchild = lt
 				Q.EnQuene(QElem{subtree[:i], pos, lt})
 				pos++
-			case i == len(subtree): // single node tree
+			case i == len(subtree): // illegal input sequence.
 				continue
-			default: // Both left child and right child exist
+			default: // Both left child and right child exist.
 				lt := new(BinTree)
 				rt := new(BinTree)
 				t.rchild = rt
