@@ -1,12 +1,12 @@
 /**/
-/* Get postorder sequence from levelorder and inorder sequence.   */
-/* Create a binary tree from the levelorder and inorder sequence. */
-/* PostOrder the binary tree and then get the postorder sequence. */
-/* sample input                                                   */
-/* ABCDEFGHIJKLMNOPQRSTUVWXYZ                                     */
-/* GDWQXLHBEIRYMACSNTJOZUFKVP                                     */
-/* sample output                                                  */
-/* G W X Q L H D Y R M I E B S T N Z U O J V P K F C A            */
+/* Get postorder sequence from levelorder and inorder sequence.            */
+/* Create a binary tree from the levelorder and inorder sequence.          */
+/* Postorder traverse the binary tree and then get the postorder sequence. */
+/* sample input                                                            */
+/* ABCDEFGHIJKLMNOPQRSTUVWXYZ                                              */
+/* GDWQXLHBEIRYMACSNTJOZUFKVP                                              */
+/* sample output                                                           */
+/* G W X Q L H D Y R M I E B S T N Z U O J V P K F C A                     */
 /**/
 
 package main
@@ -80,31 +80,21 @@ func CreateBinTree(tree *BinTree, level string, in string) {
 		t.data = level[npos]
 		if pos <= len(level) {
 			i := 0
-			// Find the position of root node(level[pos]) in inorder sequence.
+			// Find the position of root node (level[pos]) in inorder sequence.
 			for ; i < len(subtree) && level[npos] != subtree[i]; i++ {
 			}
-			switch {
-			case len(subtree) == 1:
-				continue
-			case i == 0: // none left child
-				rt := new(BinTree)
-				t.rchild = rt
-				Q.EnQuene(QElem{subtree[i+1:], pos, rt})
-				pos++
-			case i == len(subtree)-1: // none right child
+			if i == len(subtree) { // illegal input sequence.
+				break
+			}
+			if i != 0 { // have left child
 				lt := new(BinTree)
 				t.lchild = lt
 				Q.EnQuene(QElem{subtree[:i], pos, lt})
 				pos++
-			case i == len(subtree): // illegal input sequence.
-				continue
-			default: // Both left child and right child exist.
-				lt := new(BinTree)
+			}
+			if i != len(subtree)-1 { // hava right child
 				rt := new(BinTree)
 				t.rchild = rt
-				t.lchild = lt
-				Q.EnQuene(QElem{subtree[:i], pos, lt})
-				pos++
 				Q.EnQuene(QElem{subtree[i+1:], pos, rt})
 				pos++
 			}
@@ -119,11 +109,11 @@ func PostOrder(T *BinTree) {
 		fmt.Printf("%s ", string(T.data))
 	}
 }
+
 func main() {
 	var level, in string
 	t := new(BinTree)
 	fmt.Scan(&level, &in)
-	fmt.Println(level, in)
 	CreateBinTree(t, level, in)
 	PostOrder(t)
 	fmt.Println()
