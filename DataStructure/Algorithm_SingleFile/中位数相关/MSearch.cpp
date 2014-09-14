@@ -1,6 +1,7 @@
+/*求中位数算法，划分算法的应用*/
 #include "stdio.h"
  int M_Search(int a[], int b[],int n) 
- {//求中位数算法
+ {
  	int s1=0,d1=n-1,m1,s2=0,d2=n-1,m2;
  	while(s1 != d1 || s2 != d2)
  	{
