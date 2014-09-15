@@ -6,7 +6,7 @@ import (
 	)
 
 func HeapSort(b []int) {
-	// Consider s to be a commplete binary tree.
+	// Consider b to be a commplete binary tree.
 	// Build heap with greatest element on the top.
 	for i := (len(b)-1) / 2; i > 0; i-- {
 		HeapAdjust(b, i)
