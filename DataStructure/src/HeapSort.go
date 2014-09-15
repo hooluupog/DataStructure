@@ -40,7 +40,7 @@ func HeapAdjust(b []int, i int) {
 
 func IsHeap(b []int) bool { // If s is a big endian heap.
 	length := len(b) - 1
-	if length % 2 == 0 { // Len(s) is even number. S contains a single-branch node.
+	if length % 2 == 0 { // Len(b)-1 is even number. b contains a single-branch node.
 		if b[length/2] < b[length] {
 			return false
 		}
@@ -49,7 +49,7 @@ func IsHeap(b []int) bool { // If s is a big endian heap.
 				return false
 			}
 		}
-	} else { // Len(s) is odd number,none single-branch node.
+	} else { // Len(b)-1 is odd number,none single-branch node.
 		for i := length / 2; i >= 1; i-- {
 			if b[i] < b[2*i] || b[i] < b[2*i+1] {
 				return false
