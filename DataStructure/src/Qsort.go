@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"math/rand"
 )
 
@@ -31,7 +32,15 @@ func Partition(a []int, low int, high int) int {
 }
 
 func main() {
-	a := []int{2, 1, 4, 9, 4, 8, 6, 20, 13, 7, 5, 2}
-	Qsort(a, 0, len(a)-1)
-	fmt.Println(a)
+	var a int
+	var l []int
+	for {
+		_, err := fmt.Scan(&a)
+		if err == io.EOF {
+			break
+		}
+		l = append(l, a)
+	}
+	Qsort(l, 0, len(l)-1)
+	fmt.Println(l)
 }

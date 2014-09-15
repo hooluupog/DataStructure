@@ -1,26 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	)
 
-func HeapSort(s string) string {
-	b := make([]byte, len(s)+1)
-	copy(b[1:], []byte(s))
+func HeapSort(b []int) {
 	// Consider s to be a commplete binary tree.
 	// Build heap with greatest element on the top.
-	for i := len(s) / 2; i > 0; i-- {
+	for i := (len(b)-1) / 2; i > 0; i-- {
 		HeapAdjust(b, i)
 	}
 	// Continually Pop heap top elements and adjust remaining elements to be a heap.
-	for i := len(s); i > 1; i-- {
+	for i := len(b) - 1; i > 1; i-- {
 		//swap the top element with the last element on the heap.
 		b[i], b[1] = b[1], b[i]
 		// Generate new heap.
 		HeapAdjust(b[:i], 1)
 	}
-	return string(b[1:])
 }
 
-func HeapAdjust(b []byte, i int) {
+func HeapAdjust(b []int, i int) {
 	// Siftdown i
 	siftdata := b[i] //Save the element to be siftdown.
 	for child := 2 * i; child <= len(b)-1; child = 2 * child {
@@ -38,11 +38,9 @@ func HeapAdjust(b []byte, i int) {
 	b[i] = siftdata // Put the siftdata at the final position.
 }
 
-func IsHeap(s string) bool { // If s is a big endian heap.
-	b := make([]byte, (len(s) + 1))
-	copy(b[1:], []byte(s))
-	length := len(s)
-	if length%2 == 0 { // Len(s) is even number. S contains a single-branch node.
+func IsHeap(b []int) bool { // If s is a big endian heap.
+	length := len(b) - 1
+	if length % 2 == 0 { // Len(s) is even number. S contains a single-branch node.
 		if b[length/2] < b[length] {
 			return false
 		}
@@ -62,12 +60,20 @@ func IsHeap(s string) bool { // If s is a big endian heap.
 }
 
 func main() {
-	var s string
-	fmt.Scan(&s)
-	if !IsHeap(s) {
-		res := HeapSort(s)
-		fmt.Println(res)
+	var a int
+	l := make([]int, 1)
+	l[0] = 0
+	for {
+		_, err := fmt.Scan(&a)
+		if err == io.EOF {
+			break
+		}
+		l = append(l, a)
+	}
+	if !IsHeap(l) {
+		HeapSort(l)
+		fmt.Println(l[1:])
 	} else {
-		fmt.Println(s, "is already a heap.")
+		fmt.Println(l[1:], "is already a heap.")
 	}
 }
