@@ -13,6 +13,7 @@
 * 利用数学归纳法可证每次合并都需要Θ(n)，并且需要log(n/k)次合并)。
 * 总时间为Θ(nk+nlog(n/k)).
 * 因此有,Θ(nk+nlog(n/k)) <= Θ(nlogn) ->  Θ(nk) <= Θ(nlogn) -> Θ(k) <= Θ(logn) 即k <= logn.
+* (注意：上面是阶数运算，Θ(nk)比Θ(nlog(n/k))高阶，因此Θ(nk+nlog(n/k))等价于Θ(nk).
 */
 
 package main
