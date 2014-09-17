@@ -12,8 +12,7 @@
 * 合并这些列表需要Θ(nlog(n/k))的时间。(原始归并排序中，合并n/k个规模为k的列表需要 cn/k * k = Θ(n)，
 * 利用数学归纳法可证每次合并都需要Θ(n)，并且需要log(n/k)次合并)。
 * 总时间为Θ(nk+nlog(n/k)).
-* 因此有,Θ(nk+nlog(n/k)) <= Θ(nlogn) ->  Θ(nk) <= Θ(nlogn) -> Θ(k) <= Θ(logn) 即k <= logn.
-* (注意：上面是阶数运算，Θ(nk)比Θ(nlog(n/k))高阶，因此Θ(nk+nlog(n/k))等价于Θ(nk).
+* 因此有,Θ(nk+nlog(n/k)) = Θ(n(k + logn - logk)) = Θ(nlogn) => k = Θ(logn) 即k的阶取值不能大于Θ(logn).
 */
 
 package main
