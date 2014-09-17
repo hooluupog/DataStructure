@@ -13,6 +13,7 @@
 * 利用数学归纳法可证每次合并都需要Θ(n)，并且需要log(n/k)次合并)。
 * 总时间为Θ(nk+nlog(n/k)).
 * 因此有,Θ(nk+nlog(n/k)) = Θ(n(k + logn - logk)) = Θ(nlogn) => k = Θ(logn) 即k的阶取值不能大于Θ(logn).
+* 实际中，不同硬件环境最优k值可能不同;当n较小的时候，k适当的取大些;n较大时，k取得小一些。
 */
 
 package main
@@ -26,7 +27,7 @@ import (
 func MergeSort(a []int, low, high int) {
 	if low < high {
 		mid := (low + high) / 2 // 从中间划分两个子序列
-		k := int(math.Log(float64(len(a))))
+		k := int(math.Log(float64(len(a)))) //当n非常大的时候，k的最优值渐进lgn
 		if (high - low) > 2*k { // 如果当前表的长度大于2*k,2个子表归并排序
 			MergeSort(a, low, mid)    // 递归排序左子序列
 			MergeSort(a, mid+1, high) // 递归排序右子序列
