@@ -28,10 +28,10 @@ func MergeSort(a []int, low, high int) {
 	if low < high {
 		mid := (low + high) / 2 // 从中间划分两个子序列
 		k := int(math.Log(float64(len(a))))
-		if (high - low) > 2*k { // 如果子表长度大于2*k,子表归并排序
+		if (high - low) > 2*k { // 如果当前表的长度大于2*k,2个子表归并排序
 			MergeSort(a, low, mid)    // 递归排序左子序列
 			MergeSort(a, mid+1, high) // 递归排序右子序列
-		} else { // 如果子表长度小于等于2K，使用直接插入排序对子表排序
+		} else { // 如果当前表的长度小于等于2*K，使用直接插入排序对2个子表排序
 			InsertSort(a, low, mid)
 			InsertSort(a, mid+1, high)
 		}
