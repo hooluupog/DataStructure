@@ -25,7 +25,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"time"
 )
 
 const INSERTSORT_THRESHOLD = 7
@@ -97,10 +96,7 @@ func main() {
 	}
 	aux := make([]int, len(l)) // 辅助数组
 	copy(aux, l)
-	start := time.Now()
 	MergeSort(aux, l, 0, len(l)-1)
-	duration := time.Since(start).Seconds()
-	fmt.Println(duration)
 	fmt.Fprintln(w, l)
 	w.Flush()
 }
