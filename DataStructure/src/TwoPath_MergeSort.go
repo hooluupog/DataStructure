@@ -39,25 +39,6 @@ func Merge(aux []int, a []int, low, mid, high int) {
 	} // for
 }
 
-func InsertSort(a []int, low, high int) {
-	for i := low + 1; i <= high; i++ { // 依次将a[low+1]~a[high]插入到前面已排序序列
-		temp := a[i]     // 暂存a[i]
-		l, h := low, i-1 // 设置折半查找范围
-		for l <= h {     // 开始折半查找(升序)
-			mid := (l + h) / 2 // 取中间点
-			if a[mid] > temp { // 查找左半子表
-				h = mid - 1
-			} else { // 查找右半子表
-				l = mid + 1
-			}
-		}
-		for j := i - 1; j >= h+1; j-- { // 统一后移元素，空出插入位置
-			a[j+1] = a[j]
-		}
-		a[h+1] = temp // 插入操作
-	}
-}
-
 func main() {
 	var a int
 	var l []int
