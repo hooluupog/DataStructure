@@ -31,7 +31,7 @@ func Income(a []int, k int) {
 		}
 		sort.IntSlice(a).Sort() // 对正数序列重新排序.
 		k = k - changes         // 剩余的转变次数.
-		if k%2 != 0 {           // 转变次数为奇数次
+		if k % 2 != 0 {           // 转变次数为奇数次
 			a[0] *= -1 // 将最小的正数转变为负数
 		}
 	}
