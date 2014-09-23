@@ -63,6 +63,41 @@ func Merge(aux []int, a []int, low, mid, high int) {
 	} // for
 }
 
+func Reverse(a []int, low int, high int) {
+	for i, j := low, high; i < j; {
+		a[i], a[j] = a[j], a[i]
+		i++
+		j--
+	}
+}
+
+func Exchange(a []int, low int, mid int, high int) {
+// 交换[low,mid]和[mid+1,high]两个有序序列
+	Reverse(a, low, mid)
+	Reverse(a, mid+1, high)
+	Reverse(a, low, high)
+}
+
+// 原地归并算法，空间复杂度为O(1),由于要反复swap，该算法在数据量较大的时候性能很差
+// 区间[low,mid]和[mid+1,high]分别为有序序列，初始化时i=low,k=mid,j=mid+1.向后移动i找到第一个
+// a[i]>a[j]的位置,接着移动j找到第一个a[j]>a[i]的位置,则[i,mid]是比[mid+1,j-1]大的子区间，交换
+// 这两个子区间。后面的[j-mid+i,j-1]和[j,high]成为新的两个有序的子序列，再进行swap，如此反复
+// 直到i,j都移动到表尾。
+func InplaceMerge(a []int, low int, mid int, high int) {
+	i, k, j := low, mid, mid+1
+	for i < j && j <= high {
+		step := 0
+		for ; i < j && a[i] <= a[j]; i++ {
+		}
+		for ; j <= high && a[j] <= a[i]; j++ {
+			step++
+		}
+		Exchange(a, i, k,j-1)
+		i = i + step
+		k = j - 1
+	}
+}
+
 func InsertSort(a []int, low, high int) {
 	for i := low + 1; i <= high; i++ { // 依次将a[low+1]~a[high]插入到前面已排序序列
 		temp := a[i]     // 暂存a[i]
