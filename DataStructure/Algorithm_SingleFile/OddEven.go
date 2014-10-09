@@ -1,4 +1,5 @@
-// 同OddEven.cpp
+// 同OddEven.cpp，但该算法由于每次发现奇数时要移动元素，算法时间复杂度为O(n^2).
+// OddEven.cpp采用链表实现避免了这个问题，算法时间复杂度为O(n).
 
 package main
 
