@@ -1,4 +1,4 @@
-// 同OddEven.cpp,只是这个算法会改变数组中奇数和偶数的原次序位置
+// 同OddEven.cpp
 
 package main
 
@@ -6,6 +6,7 @@ import "fmt"
 
 func OddEven(a []int) {
 	pivotkey, low := 0, 0
+	// 将第一个奇数交换到数组第一位作为枢轴
 	for ; low < len(a) && a[low]%2 == 0; low++ {
 	}
 	if low < len(a) {
@@ -15,6 +16,7 @@ func OddEven(a []int) {
 		}
 		a[0] = pivotkey
 	}
+	// 向后扫描，发现奇数将其移动到上一个奇数的下一位，后面的其他元素依次后移。
 	odd, even := 1, 1
 	for ; even < len(a); even++ {
 		if a[even]%2 != 0 {
