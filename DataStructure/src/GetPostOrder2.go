@@ -24,7 +24,7 @@ func postOrder(pstart, istart int, n int, isRoot bool) {
 func main() {
 	var n int
 	for {
-		_, err := fmt.Scanln(&n)
+		_, err := fmt.Scan(&n)
 		if err == io.EOF {
 			break
 		}
@@ -35,12 +35,6 @@ func main() {
 		}
 		for i := 0; i < n; i++ {
 			fmt.Scan(&in[i])
-		}
-		if runtime.GOOS == "windows" {
-			// on windows,it uses '\r\n' as newline,but Go nowadays uses unix's method('\n' as newline).
-			// So we need read "\r" before read newline's data.
-			var r byte // receive '\r' delim.
-			fmt.Scan(&r)
 		}
 		postOrder(0, 0, n, true)
 		fmt.Printf("\n")
