@@ -5,7 +5,7 @@ import "fmt"
 func GreatestSum(a []int) int64 {
 	// 动态规划法
 	// diff[i] = max{a[0],a[1],...,a[i-1]} - a[i]
-	// 则diff[i+1] = max{a[0],...a[i]} - a[i+1]
+	// 则diff[i+1] = max{a[0],...,a[i]} - a[i+1]
 	// ans = max{diff[0],diff[1],...,diff[n-1]}
 	// 其中，diff[i]表示以a[i]为减数的所有数对之差的最大值
 
