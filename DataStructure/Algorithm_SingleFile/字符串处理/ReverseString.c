@@ -22,7 +22,7 @@ int main()
     char s[255],*p,*q;
     int i=0,n;
     fgets(s,255,stdin);
-    s[strlen(s)-1] = ' ';
+    s[strlen(s)-1] = ' '; // 不包含换行符
     p = q = s;
     while(*p != '\0')
     {
