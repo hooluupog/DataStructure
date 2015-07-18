@@ -23,10 +23,12 @@ int main(){
     testALGraph();
     */
     //Dijkstra
-    test_DIJ();
+    //test_DIJ();
     //FLOYD
-    test_FLOYD();
+    //test_FLOYD();
     //TopoLogicalSort
-    test_TopoSort();
+    //test_TopoSort();
+    //GetPostOrder
+    //testPostOrder();
 	return 0;
 }

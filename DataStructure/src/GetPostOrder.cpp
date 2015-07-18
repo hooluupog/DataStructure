@@ -11,7 +11,7 @@ void postOrder(int pstart,int istart,int n,int isRoot){
 	postOrder(pstart+i+1,istart+i+1,n-i-1,0);
 	isRoot? printf("%d",pre[pstart]):printf("%d ",pre[pstart]);
 }
-int main(){
+void testPostOrder(){
 	int n,i;
 	while(scanf("%d",&n) != EOF){
 		for(i = 0;i<n;i++)
@@ -21,5 +21,4 @@ int main(){
 		postOrder(0,0,n,1);
 		printf("\n");
 	}
-	return 0;
 }

@@ -26,3 +26,5 @@ void test_DIJ();
 void test_FLOYD();
 //TopoSort
 void test_TopoSort();
+//GetPostOrder
+void testPostOrder();
