@@ -30,5 +30,9 @@ int main(){
     //test_TopoSort();
     //GetPostOrder
     //testPostOrder();
+	//GenerateBinTree
+	//testGenerate();
+	//BinTreeProblem
+	testProblems();
 	return 0;
 }

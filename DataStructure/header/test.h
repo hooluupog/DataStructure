@@ -28,3 +28,7 @@ void test_FLOYD();
 void test_TopoSort();
 //GetPostOrder
 void testPostOrder();
+//GenerateBinTree
+void testGenerate();
+//BinTreeProblem
+void testProblems();
