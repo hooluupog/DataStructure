@@ -30,14 +30,49 @@ void ReplaceBlank(char string[], int length){
    }
 }
 
-int main(){
-    char dest[100];
-    char src[] = "We are happy.";
-    memcpy(dest,src,14);
-    ReplaceBlank(dest,100);
-    int i = 0;
-    while(dest[i] != '\0'){
-    	printf("%c",dest[i++]);
+unsigned int FirstBitIs1(int num){
+    int indexBit = 0;
+    while(((num & 1) == 0) && (indexBit < 8*sizeof(int))){
+    	num  = num >> 1;
+    	indexBit++;
     }
+    return indexBit;
+}
+
+bool IsBit1(int num,int indexof1){
+	return (num >> indexof1) & 1;
+}
+
+void AppearOnce(int data[],int *num1,int *num2){
+	if (data == NULL || data[0] < 2) return;
+	int ExclusiveOR =  0,i;
+	for(i=1;i<=data[0];i++){// a[0]为哨兵位
+		ExclusiveOR ^= data[i]; //异或结果
+	}
+	unsigned int indexof1 = FirstBitIs1(ExclusiveOR);  //第一个非零位
+	*num1 = *num2 = 0;
+	for(i = 1;i <= data[0];i++){
+		if(IsBit1(data[i],indexof1)){ //对应位非零的数在一起相异或
+			*num1 ^= data[i];
+		}else{ // //对应位为零的数在一起相异或
+			*num2 ^= data[i];
+		}
+	}// 最终*num1和*num2为所求的两个不同数
+}
+
+
+int main(){
+	char dest[100];
+	char src[] = "We are happy.";
+	memcpy(dest, src, 14);
+	ReplaceBlank(dest, 100);
+	int i = 0;
+	while (dest[i] != '\0') {
+		printf("%c", dest[i++]);
+	}
+	int a[] = { 8, 2, 4, 3, 6, 3, 2, 5, 5 };
+	int num1, num2;
+	AppearOnce(a, &num1, &num2);
+	printf("%d %d\n", num1, num2);
     return 0;
 }
