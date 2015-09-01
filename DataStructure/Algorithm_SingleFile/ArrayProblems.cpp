@@ -63,6 +63,52 @@ void AppearOnce(int data[],int *num1,int *num2){
 	}// 最终*num1和*num2为所求的两个不同数
 }
 
+int GetFirstK(int data[],int low,int high,int k){
+    // 找出最左边k的位置
+    if (high < low) return -1;
+    int mid = (low + high) >> 1;
+    if (data[mid] == k){
+        if (mid > 0 && data[mid-1] == k){
+            high = mid - 1;
+        }else{
+            return mid;
+        }
+    }else if(data[mid] > k){
+        high = mid - 1;
+    }else{
+        low = mid + 1;
+    }
+    return GetFirstK(data,low,high,k);
+}
+
+int GetLastK(int data[],int low,int high,int k){
+    // 找出最右边k的位置
+    if (high < low) return -1;
+    int mid = (low + high) >> 1;
+    if (data[mid] == k){
+        if (mid+1 <= high && data[mid+1] == k){
+            low = mid + 1;
+        }else{
+            return mid;
+        }
+    }else if(data[mid] > k){
+        high = mid - 1;
+    }else{
+        low = mid + 1;
+    }
+    return GetLastK(data,low,high,k);
+}
+
+// 有序数组中某个元素出现的次数
+int GetNumOfK(int data[],int length,int k){
+    if (length <= 0 || data == NULL) return 0;
+    int right =  GetLastK(data,0,length-1,k);
+    int left =   GetFirstK(data,0,length-1,k);
+    if (right > -1 && left > -1){
+        return right - left + 1;
+    }
+    return 0;
+}
 
 int main(){
 	char dest[100];
@@ -77,5 +123,7 @@ int main(){
 	int num1, num2;
 	AppearOnce(a, &num1, &num2);
 	printf("%d %d\n", num1, num2);
+	int b[] = {1,2,3,3,3,3,4,5};
+	printf("%d\n",GetNumOfK(b,8,3));
     return 0;
 }
