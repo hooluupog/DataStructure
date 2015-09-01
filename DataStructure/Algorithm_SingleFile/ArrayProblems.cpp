@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "memory.h"
 
+// 用'20%'替换字符串中的空格。
 void ReplaceBlank(char string[], int length){
 	//length为字符数组总容量，假设string[]空间足够大
    if(string == NULL && length <= 0) return;
@@ -30,6 +31,7 @@ void ReplaceBlank(char string[], int length){
    }
 }
 
+
 unsigned int FirstBitIs1(int num){
     int indexBit = 0;
     while(((num & 1) == 0) && (indexBit < 8*sizeof(int))){
@@ -43,6 +45,7 @@ bool IsBit1(int num,int indexof1){
 	return (num >> indexof1) & 1;
 }
 
+// 寻找整型数组中仅出现过一次的两个不同数(其他的数都出现过两次)。
 void AppearOnce(int data[],int *num1,int *num2){
 	if (data == NULL || data[0] < 2) return;
 	int ExclusiveOR =  0,i;
