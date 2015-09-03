@@ -30,6 +30,7 @@
  *
  * 判断是否平衡2叉树
  * 最近的公共祖先结点
+ * 寻找中序遍历的下一个结点
  */
 
 #include "stdio.h"
@@ -176,6 +177,40 @@ BinNode *LastCommonParent(BinTree r, int v1, int v2) {
 	return pLast;
 }
 
+bool find(BinTree root, int node[], int p) {
+	bool found = false;
+	if (root->lchild != NULL) {
+		found = find(root->lchild, node, p);
+	}
+	if (!found) {
+		if (ToInt(root) == p) {
+			node[0] = p;
+		} else {
+			if (node[0] == p) {
+				node[1] = ToInt(root);
+				return true;
+			}
+		}
+		if (root->rchild != NULL) {
+			found = find(root->rchild, node, p);
+		}
+	}
+	return found;
+}
+//寻找中序遍历的下一个结点
+int findSucc(BinTree root,int p){
+	// write code here
+	if (root == NULL)
+		return -1;
+	int node[2]; //存储p结点和p的后继结点
+	bool found = false;
+	found = find(root, node, p);
+	if (found){
+		return node[1];
+	}
+	return -1;
+}
+
 void testProblems() {
 	BinTree r, s;
 	freopen("input/BinTree1.txt", "r", stdin);
@@ -205,4 +240,6 @@ void testProblems() {
 		printf("%d\n", ToInt(p));
 	}
 	printf("\n");
+    int node = findSucc(r,6);
+    printf("%d\n", node);
 }

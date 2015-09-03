@@ -58,7 +58,7 @@ BiNode *BuildFromPostInOrder(int *post, int *in, int ps, int pe, int is,int ie) 
 
 void testGenerate() {
 	//       1
-	//     /   \
+    //     /   \
 	//    2     3
 	//   / \   /
 	//  4   5 6
