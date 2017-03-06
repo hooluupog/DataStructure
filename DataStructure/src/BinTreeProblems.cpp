@@ -239,7 +239,6 @@ void testProblems() {
 	if (p) {
 		printf("%d\n", ToInt(p));
 	}
-	printf("\n");
     int node = findSucc(r,6);
     printf("%d\n", node);
 }
