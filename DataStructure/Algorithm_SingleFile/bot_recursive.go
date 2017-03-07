@@ -23,7 +23,7 @@ func main() {
 	var x, y int
 	var input string
 	fmt.Scan(&input)
-	cmds, _ := getCmd(input, 0)
+	cmds := getCmd(input)
 	for _, cmd := range cmds {
 		switch string(cmd) {
 		case "F":
@@ -38,29 +38,34 @@ func main() {
 	}
 	fmt.Println("(", x, ",", y, ")")
 }
-func getCmd(s string, pos int) (res string, po int) {
-	repeat := ""
-	subCmd := ""
-	i := 0
-	for i = pos; i < len(s); i++ {
-		a := string(s[i])
-		if a == "(" {
-			subCmd, i = getCmd(s, i+1)
+
+var pos int = 0
+
+// recursive.
+func getCmd(s string) string {
+	if pos < len(s) {
+		a := string(s[pos])
+		switch {
+		case a == ")":
+			return ""
+		case a == "(":
+			pos++
+			return getCmd(s)
+		case a >= "0" && a <= "9":
+			repeat := ""
+			for a >= "0" && a <= "9" {
+				repeat += a
+				pos++
+				a = string(s[pos])
+			}
 			count, _ := strconv.Atoi(repeat)
-			subCmd = strings.Repeat(subCmd, count)
-			res += subCmd
-			continue
+			subCmd := strings.Repeat(getCmd(s), count)
+			pos++
+			return subCmd + getCmd(s)
+		default:
+			pos++
+			return a + getCmd(s)
 		}
-		if a == ")" {
-			po = i
-			return res, po
-		}
-		if a >= "0" && a <= "9" {
-			repeat += a
-			continue
-		}
-		res += a
 	}
-	po = i
-	return res, po
+	return ""
 }
