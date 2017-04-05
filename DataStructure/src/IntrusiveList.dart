@@ -10,7 +10,7 @@
  *           _ListNode<E> _next;
  *       }
  *       class LinkList<E> {
- *           _ListNode<E> _first;
+ *           _ListNode<E> _head;
  *       }
  *        
  *             -> Item.next -> Item.next -> nil
@@ -25,7 +25,7 @@
  *         ListNode<E> _next;
  *     }
  *     class LinkList<E extends ListNode<E>> extends Iterable<E>{
- *         ListNode<E> _first;
+ *         ListNode<E> _head;
  *     }
  *     
  *             -> data
@@ -43,7 +43,7 @@
  *     Circular implementation simplifies list manipulation implementation.    
  * */
 
-abstract class ListNode<E extends ListNode<E>>{
+class ListNode<E extends ListNode<E>>{
     LinkList<E> _list;  // ListNode's link. If _list == null,ListNode is
     // not Linked in any LinkList.
     ListNode<E> _prev;
@@ -52,87 +52,69 @@ abstract class ListNode<E extends ListNode<E>>{
 }
 
 class LinkList<E extends ListNode<E>> extends Iterable<E>{
-    ListNode<E> _first;
-    int _length = 0;
-    LinkList();
+    ListNode<E> _head;
+    int _len = 0;
+    LinkList(){
+        _head = new ListNode<E>(); 
+        _head._list = this;
+        _head._prev = _head._next = _head;
+    }
 
-    bool get isEmpty => _length == 0;
+    bool get isEmpty => _len == 0;
     Iterator<E> get iterator => new _LinkListIterator<E>(this);
 
-    void add(E value){ // append [value] into LinkList.
-        _insertBefore(_first,value,updateFirst : false);
+    void add(E e){ // append [e] into LinkList.
+        _insert(e,_head._prev);
     }
 
-    void addFirst(E value){ // add [value] at the head of LinkList. 
-        _insertBefore(_first,value,updateFirst : true);
+    void addFirst(E e){ // add [e] at the first. 
+        _insert(e,_head);
     }
 
-    void _insertBefore(E next, E value,{bool updateFirst}){
-        if(value.list != null){
+    void insertBefore(E e,E at){//Insert [e] before [at].
+        _insert(e,at._prev);
+    }
+
+    void insertAfter(E e,E at){//Insert [e] after [at].
+        _insert(e,at);
+    }
+
+    void _insert(E e,E at){
+        if(e.list != null){
             throw new StateError('ListNode is already in a LinkList.');
         }
-        value._list = this; // Link value into LinkList.
-        if(isEmpty){
-            value._prev = value._next = value;
-            _first = value;
-        }else{
-            E pre = next._prev;
-            next._prev = value;
-            value._prev = pre;
-            value._next = next;
-            pre._next = value;
-            if(updateFirst){
-                _first = value;
-            }
-        }
-        _length++;
+        e._list = this; // Link value into LinkList.
+        e._prev = at;
+        e._next = at._next;
+        at._next = e;
+        e._next._prev = e;
+        _len++;
     }
 
-    // Drop [value] 's link from LinkList.
-    void _unlink(E value){
-        E next = value._prev._next = value._next;
-        value._next._prev = value._prev;
-        value._list = value._prev = value._next = null;
-        _length--;
-        if(isEmpty){
-            _first = null;
-        }else if (value == _first){
-            _first = next;
-        }
-    }
-
-    bool remove(E value){
-        if(value.list != this) { return false; }
-        value._list = null; // Unlink value from LinkList.
-        _unlink(value);
-        return true;
+    E remove(E e){
+        e._prev._next = e._next;
+        e._next._prev = e._prev;
+        e._list = e._prev = e._next = null;
+        _len--;
+        return e;
     }
 
     void reverseBetween(int m, int n) {
-        if (m < 1 || n > _length){ 
+        if (m < 1 || n > _len){ 
             throw new ArgumentError('Index out of bounds. Wrong range ($m,$n)'); 
         }
         var cnt = n - m; // 1 <= m <= n <= LinkList.Length
-        E p,q;
-        var recovery = false;
-        var head = _first;
-        p = _first;
-        for (var i = 1; i < m; i++) { // p point to the first node to be reversed.
-            p = p._next;
+        var start = first;
+        for (var i = 1; i < m; i++) { //start points to the first node to be reversed.
+            start = start._next;
         }
-        if (p != _first) { 
-            recovery = true; // Need do head node recovering.
-        }
-        var next = p;
-        while (cnt > 0) { // insert nodes from m to n into list.
-            q = p._next;
-            _unlink(q);
-            _insertBefore(next,q,updateFirst : true);
-            next = q;
+        var end = start;
+        while(cnt > 0) { // Insert nodes from m to n into list.
+            var curr = end._next;
+            remove(curr);
+            insertBefore(curr, start);
+            start = curr;
             cnt--;
-        }
-        if (recovery) { 
-            _first = head; // head node recovery.
         }
     }
 }
@@ -140,24 +122,21 @@ class LinkList<E extends ListNode<E>> extends Iterable<E>{
 class _LinkListIterator<E extends ListNode<E>> implements Iterator<E>{
     final LinkList<E> _list;
     ListNode<E> _next;
-    E _current;
-    bool _visitedFirst;
+    E _curr;
     _LinkListIterator(LinkList<E> L) 
         : _list = L,
-        _next = L._first,
-        _visitedFirst = false;
+        _next = L._head._next;
 
     bool moveNext(){
-        if(_list.isEmpty || (_visitedFirst && _next == _list.first)){
-            _current = null;
+        if(_list.isEmpty ||  _next == _list._head){
+            _curr = null;
             return false;
         }
-        _current = _next;
+        _curr = _next;
         _next = _next._next;
-        _visitedFirst = true;
         return true;
     }
-    E get current => _current;
+    E get current => _curr;
 }
 
 //  Here is how to use Intrusive LinkList. E wrapped to ListNode<E>

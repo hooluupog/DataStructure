@@ -37,7 +37,7 @@ func toSlice(L *slist.List) []float64 {
 
 func main() {
 	l := []float64{1.2, 2.3, 3.4, 4.5, 5.6, 4, 0, 5.0, 2, 8, 9}
-	L := new(slist.List)
+	L := slist.New()
 	e := &E{val: float64(0)}
 	L.Add(e)
 	for _, v := range l[0 : len(l)/2] {
