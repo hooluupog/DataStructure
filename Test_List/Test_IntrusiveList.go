@@ -4,7 +4,6 @@ import (
 	"fmt"
 	slist "list/intrusive"
 	"sort"
-	"strconv"
 )
 
 // Here is how to use intrusive linked list:
@@ -19,13 +18,6 @@ type E struct {
 func (e *E) Get() *slist.Elem { return &e.Elem }
 
 //////////////////////////////////////////////////////////////
-func ToString(l *slist.List) string {
-	var s string
-	for e := l.First(); e != nil; e = e.Get().Next() {
-		s += strconv.FormatFloat(e.(*E).val.(float64), 'g', -1, 64) + " "
-	}
-	return s
-}
 
 func toSlice(L *slist.List) []float64 {
 	var res []float64
@@ -46,11 +38,11 @@ func main() {
 	for _, v := range l[len(l)/2 : len(l)] {
 		L.AddFirst(&E{val: float64(v)})
 	}
-	fmt.Println(ToString(L))
+	fmt.Println(toSlice(L))
 	L.ReverseBetween(3, 8)
-	fmt.Println(ToString(L))
+	fmt.Println(toSlice(L))
 	L.Remove(e)
-	fmt.Println(ToString(L))
+	fmt.Println(toSlice(L))
 	fmt.Printf("first = %v last = %v length = %v \n", L.First().(*E).val, L.Last().(*E).val, L.Len())
 	nl := toSlice(L)
 	var sl []float64
@@ -63,6 +55,6 @@ func main() {
 	sort.Slice(sl, func(i, j int) bool { return sl[i] < sl[j] })
 	fmt.Println(sl)
 	L.ReverseBetween(1, L.Len())
-	fmt.Println(ToString(L))
+	fmt.Println(toSlice(L))
 	L.ReverseBetween(0, L.Len()) // Expected error.
 }
