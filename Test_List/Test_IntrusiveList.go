@@ -1,9 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	slist "list/intrusive"
+	"os"
 	"sort"
+	"strconv"
+	"time"
 )
 
 // Here is how to use intrusive linked list:
@@ -27,7 +31,43 @@ func toSlice(L *slist.List) []float64 {
 	return res
 }
 
+func removeTest() {
+	var l []*E
+	L := slist.New()
+	e := &E{val: float64(0)}
+	L.Add(e)
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		f, _ := strconv.ParseFloat(scanner.Text(), 64)
+		l = append(l, &E{val: f})
+	}
+	for _, v := range l[0 : len(l)/2] {
+		L.Add(v)
+	}
+	for _, v := range l[len(l)/2 : len(l)] {
+		L.AddFirst(v)
+	}
+	start := time.Now()
+	L.Remove(e)
+	i := len(l) / 2
+	j := i + 1
+	for L.Len() != 0 {
+		if i >= 0 {
+			L.Remove(l[i])
+			i--
+		}
+		if j < len(l) {
+			L.Remove(l[j])
+			j++
+		}
+	}
+	duration := time.Since(start)
+	fmt.Printf(" %vms\n", duration.Seconds()*1000)
+}
+
 func main() {
+	removeTest()
 	l := []float64{1.2, 2.3, 3.4, 4.5, 5.6, 4, 0, 5.0, 2, 8, 9}
 	L := slist.New()
 	e := &E{val: float64(0)}
