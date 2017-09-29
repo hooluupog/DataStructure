@@ -17,6 +17,15 @@ func Qsort(a []int, low int, high int) {
 	}
 }
 
+//一种模拟尾递归优化的写法
+func Qsort2(a []int, low int, high int) {
+	for low < high {
+		pivot := Partition(a, low, high)
+		Qsort(a, low, pivot-1)
+		low = piovt + 1 // 第二次递归调用不是必须的，用迭代来替代它
+	}
+}
+
 // 划分算法
 func Partition(a []int, low int, high int) int {
 	rIndex := low + rand.Int()%(high-low+1)
