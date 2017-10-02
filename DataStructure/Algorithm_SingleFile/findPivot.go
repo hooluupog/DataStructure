@@ -58,6 +58,7 @@ func findPivot(n int, src, dst []int) []int {
 }
 
 func main() {
+	w := bufio.NewWritter(os.Stdout)
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
 	var src []int
@@ -78,9 +79,9 @@ func main() {
 	fmt.Println(len(ans))
 	for i, v := range ans {
 		if i == 0 {
-			fmt.Print(v)
+			fmt.Fprint(w, v)
 		} else {
-			fmt.Print(" ", v)
+			fmt.Fprint(w, " ", v)
 		}
 	}
 	fmt.Println()

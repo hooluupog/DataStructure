@@ -49,7 +49,7 @@ void main() async {
       .split(new RegExp(r'[\n\r\n\s+]+'));
   s.forEach((i) => a.add(int.parse(i)));
   nonrecursiveQSort(a);
-  s = ' ';
-  a.forEach((i) => s += '  ${i.toString()}');
-  print(s.trimLeft());
+  var buffer = new StringBuffer();
+  a.forEach((i) => buffer.write(' $i'));
+  print(buffer.toString().trimLeft());
 }

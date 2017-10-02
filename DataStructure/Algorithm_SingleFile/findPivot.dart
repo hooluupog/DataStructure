@@ -29,7 +29,7 @@ void main() async {
   var dst = new List<int>.from(src);
   var ans = findPivot(src.length, src, dst);
   print(ans.length);
-  s = ' ';
-  ans.forEach((i) => s += ' ${i.toString()}');
-  print(s.trimLeft());
+  var buffer = new StringBuffer();
+  ans.forEach((i) => buffer.write(' $i'));
+  print(buffer.toString().trimLeft());
 }

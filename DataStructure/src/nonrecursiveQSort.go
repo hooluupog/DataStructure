@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strconv"
 )
 
 const STACK_SIZE = 1000 // 栈最大深度
@@ -48,7 +51,22 @@ func nonrecursiveQSort(list []int) {
 }
 
 func main() {
-	a := []int{1, 3, 2, 6, 5}
+	scanner := bufio.NewScanner(os.Stdin)
+	w := bufio.NewWriter(os.Stdout)
+	scanner.Split(bufio.ScanWords)
+	var a []int
+	for scanner.Scan() {
+		v, _ := strconv.Atoi(scanner.Text())
+		a = append(a, v)
+	}
 	nonrecursiveQSort(a)
-	fmt.Println(a)
+	for i, v := range a {
+		if i == 0 {
+			fmt.Fprint(w, v)
+		} else {
+			fmt.Fprint(w, " ", v)
+		}
+	}
+	w.Flush()
+	fmt.Println()
 }
