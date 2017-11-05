@@ -51,7 +51,9 @@
 package intrusive
 
 import (
+	"bytes"
 	"fmt"
+	"strings"
 )
 
 type item interface {
@@ -97,6 +99,14 @@ func New() *List { return new(List).Init() }
 
 func (l *List) Len() int {
 	return l.len
+}
+
+func (l *List) String() string {
+	var buf bytes.Buffer
+	for e := l.First(); e != nil; e = e.Get().Next() {
+		buf.WriteString(fmt.Sprintf("%v ", e))
+	}
+	return fmt.Sprintf("[%s]", strings.Trim(buf.String(), " "))
 }
 
 func (l *List) First() item { // return first node.

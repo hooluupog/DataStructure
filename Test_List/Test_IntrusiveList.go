@@ -21,6 +21,10 @@ type E struct {
 
 func (e *E) Get() *slist.Elem { return &e.Elem }
 
+func (e *E) String() string {
+	return fmt.Sprintf("%v", e.val)
+}
+
 //////////////////////////////////////////////////////////////
 
 func toSlice(L *slist.List) []float64 {
@@ -78,11 +82,11 @@ func main() {
 	for _, v := range l[len(l)/2 : len(l)] {
 		L.AddFirst(&E{val: float64(v)})
 	}
-	fmt.Println(toSlice(L))
+	fmt.Println(L)
 	L.ReverseBetween(3, 8)
-	fmt.Println(toSlice(L))
+	fmt.Println(L)
 	L.Remove(e)
-	fmt.Println(toSlice(L))
+	fmt.Println(L)
 	fmt.Printf("first = %v last = %v length = %v \n", L.First().(*E).val, L.Last().(*E).val, L.Len())
 	nl := toSlice(L)
 	var sl []float64
@@ -95,6 +99,6 @@ func main() {
 	sort.Slice(sl, func(i, j int) bool { return sl[i] < sl[j] })
 	fmt.Println(sl)
 	L.ReverseBetween(1, L.Len())
-	fmt.Println(toSlice(L))
+	fmt.Println(L)
 	L.ReverseBetween(0, L.Len()) // Expected error.
 }

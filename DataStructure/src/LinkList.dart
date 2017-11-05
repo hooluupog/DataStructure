@@ -4,11 +4,15 @@ class _ListNode<T> {
   T _val;
   _ListNode<T> _next;
   _ListNode([this._val, this._next]);
+
+  @override
+  String toString() => '$_val';
 }
 
 class LinkList<T> extends Object with IterableMixin<T> {
   _ListNode<T> _first;
   LinkList([this._first]);
+
 
   Iterator<T> get iterator => new _LinkListIterator<T>(_first);
 
@@ -48,16 +52,6 @@ class LinkList<T> extends Object with IterableMixin<T> {
         pre._next = pre._next._next;
       }
     }
-  }
-
-  void printList() {
-    var p = _first;
-    var l = [];
-    while (p != null) {
-      l.add(p._val);
-      p = p._next;
-    }
-    print(l);
   }
 
   LinkList<T> reverseBetween(int m, int n) {
@@ -118,11 +112,14 @@ void main() {
   for (var i in l) {
     L.add(i);
   }
-  L.printList();
+  print(L);
+  //L.printList();
   L = L.reverseBetween(3, 8);
-  L.printList();
+  //L.printList();
+  print(L);
   L.remove(L);
-  L.printList();
+  print(L);
+  //L.printList();
   print('first = ${L.first} last = ${L.last} length = ${L.length}');
   var nl = L.where((i) => i < 7).map((i) => i = i * 10).toList();
   print(nl);

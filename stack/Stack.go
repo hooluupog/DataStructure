@@ -1,5 +1,11 @@
 package stack
 
+import (
+	"bytes"
+	"fmt"
+	"strings"
+)
+
 type Stack struct {
 	top  *Element
 	size int
@@ -33,4 +39,12 @@ func (s *Stack) Pop() (value interface{}) {
 func (s *Stack) Top() (value interface{}) {
 	value = s.top.value
 	return
+}
+
+func (s Stack) String() string {
+	var buf bytes.Buffer
+	for !s.Empty() {
+		buf.WriteString(fmt.Sprintf("%v ", s.Pop()))
+	}
+	return fmt.Sprintf("[%s]", strings.Trim(buf.String(), " "))
 }

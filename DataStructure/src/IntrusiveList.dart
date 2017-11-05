@@ -154,11 +154,6 @@ class Slist<E> extends ListNode {
   String toString() => '${val}';
 }
 
-printList(LinkList L) {
-  var l = L.map((i) => i.toString()).toList();
-  print(l);
-}
-
 void main() {
   var l = [1.2, 2.3, 3.4, 4.5, 5.6, 4, 0, 5.0, 2, 8, 9];
   var L = new LinkList();
@@ -170,11 +165,11 @@ void main() {
   for (var i in l.sublist(l.length ~/ 2, l.length)) {
     L.addFirst(new Slist<num>(i));
   }
-  printList(L);
+  print(L);
   L.reverseBetween(3, 8);
-  printList(L);
+  print(L);
   L.remove(s);
-  printList(L);
+  print(L);
   print('first = ${L.first} last = ${L.last} length = ${L.length}');
   var nl = L
       .where((i) => num.parse(i.toString()) < 7)
@@ -184,7 +179,7 @@ void main() {
   nl.sort((a, b) => a.compareTo(b));
   print(nl);
   L.reverseBetween(1, L.length);
-  printList(L);
+  print(L);
   try {
     L.reverseBetween(0, L.length); // Expected error.
   } on ArgumentError catch (e) {
