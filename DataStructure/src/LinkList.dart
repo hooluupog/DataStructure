@@ -113,13 +113,10 @@ void main() {
     L.add(i);
   }
   print(L);
-  //L.printList();
   L = L.reverseBetween(3, 8);
-  //L.printList();
   print(L);
   L.remove(L);
   print(L);
-  //L.printList();
   print('first = ${L.first} last = ${L.last} length = ${L.length}');
   var nl = L.where((i) => i < 7).map((i) => i = i * 10).toList();
   print(nl);
