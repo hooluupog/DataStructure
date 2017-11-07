@@ -1,4 +1,4 @@
-/** Intrusive LinkedList implementation.
+/** Intrusive LinkedList implementation(with head node).
  *  Definition:
  *      An intrusive data structure is one where the data items contain the metadata needed,
  *      instead of the metadata pointing to the contained data.The intrusive linked list is 
@@ -46,8 +46,8 @@
 class ListNode<E extends ListNode<E>> {
   LinkList<E> _list; // ListNode's link. If _list == null,ListNode is
   // not Linked in any LinkList.
-  ListNode<E> _prev;
-  ListNode<E> _next;
+  E _prev;
+  E _next;
   LinkList<E> get list => _list;
 }
 
@@ -63,23 +63,23 @@ class LinkList<E extends ListNode<E>> extends Iterable<E> {
   bool get isEmpty => _len == 0;
   Iterator<E> get iterator => new _LinkListIterator<E>(this);
 
+  /// append [e] into LinkList.
   void add(E e) {
-    // append [e] into LinkList.
     _insert(e, _head._prev);
   }
 
+  /// add [e] at the first.
   void addFirst(E e) {
-    // add [e] at the first.
     _insert(e, _head);
   }
 
+  /// Insert [e] before [at].
   void insertBefore(E e, E at) {
-    //Insert [e] before [at].
     _insert(e, at._prev);
   }
 
+  /// Insert [e] after [at].
   void insertAfter(E e, E at) {
-    //Insert [e] after [at].
     _insert(e, at);
   }
 
@@ -146,8 +146,8 @@ class _LinkListIterator<E extends ListNode<E>> implements Iterator<E> {
   E get current => _curr;
 }
 
-//  Here is how to use Intrusive LinkList. E wrapped to ListNode<E>
-class Slist<E> extends ListNode {
+// Here is how to use Intrusive LinkList.E wrapped to ListNode<E>.
+class Slist<E> extends ListNode<Slist<E>> {
   E val;
   Slist([this.val]);
   @override
@@ -156,14 +156,14 @@ class Slist<E> extends ListNode {
 
 void main() {
   var l = [1.2, 2.3, 3.4, 4.5, 5.6, 4, 0, 5.0, 2, 8, 9];
-  var L = new LinkList();
+  var L = new LinkList<Slist<num>>();
   var s = new Slist<num>(0);
   L.add(s);
   for (var i in l.sublist(0, l.length ~/ 2)) {
-    L.add(new Slist<num>(i));
+    L.add(new Slist(i));
   }
   for (var i in l.sublist(l.length ~/ 2, l.length)) {
-    L.addFirst(new Slist<num>(i));
+    L.addFirst(new Slist(i));
   }
   print(L);
   L.reverseBetween(3, 8);
