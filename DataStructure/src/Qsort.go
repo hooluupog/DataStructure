@@ -21,8 +21,8 @@ func Qsort(a []int, low int, high int) {
 func Qsort2(a []int, low int, high int) {
 	for low < high {
 		pivot := Partition(a, low, high)
-		Qsort(a, low, pivot-1)
-		low = piovt + 1 // 第二次递归调用不是必须的，用迭代来替代它
+		Qsort2(a, low, pivot-1)
+		low = pivot + 1 // 第二次递归调用不是必须的，用迭代来替代它
 	}
 }
 
