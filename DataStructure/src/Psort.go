@@ -128,7 +128,7 @@ func main() {
 	var a int
 	var l []int
 	r := bufio.NewReader(os.Stdin)
-	w := bufio.NewWriter(os.Stdout)
+	//w := bufio.NewWriter(os.Stdout)
 	for {
 		_, err := fmt.Fscan(r, &a)
 		if err == io.EOF {
@@ -146,7 +146,6 @@ func main() {
 	Psort(ll)
 	elapsed = time.Since(start)
 	fmt.Println("Parallel QuickSort time used: ", elapsed)
-	fmt.Fprintln(w, l)
-	w.Flush()
-
+	//fmt.Fprintln(w, l)
+	//w.Flush()
 }
