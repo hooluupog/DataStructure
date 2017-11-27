@@ -52,7 +52,7 @@ func Qsort(s []int) {
 }
 
 // parallel quicksort.
-func Pqsort(s []int) {
+func Psort(s []int) {
 	if len(s) <= 1 {
 		return
 	}
@@ -60,7 +60,7 @@ func Pqsort(s []int) {
 	for i := 0; i < (MAXGOROUTINES - 1); i++ {
 		workers <- 1
 	}
-	pqsort(s, nil, workers)
+	psort(s, nil, workers)
 }
 
 func partition(a []int) int {
@@ -78,7 +78,7 @@ func partition(a []int) int {
 	return i
 }
 
-func pqsort(s []int, done chan int, workers chan int) {
+func psort(s []int, done chan int, workers chan int) {
 	// report to caller that we're finished
 	if done != nil {
 		defer func() { done <- 1 }()
@@ -108,15 +108,15 @@ func pqsort(s []int, done chan int, workers chan int) {
 	case <-workers:
 		// if we have spare workers, use a goroutine
 		// for parallelization
-		go pqsort(s[:pivotIdx], doneChannel, workers)
+		go psort(s[:pivotIdx], doneChannel, workers)
 	default:
 		// if no spare workers, sort synchronously
-		pqsort(s[:pivotIdx], nil, workers)
+		psort(s[:pivotIdx], nil, workers)
 		// calling this here as opposed to using the defer
 		doneChannel <- 1
 	}
 	// use the existing goroutine to sort above the pivot
-	pqsort(s[pivotIdx+1:], nil, workers)
+	psort(s[pivotIdx+1:], nil, workers)
 	// if we used a goroutine we'll need to wait for
 	// the async signal on this channel, if not there
 	// will already be a value in the channel and it shouldn't block
@@ -128,7 +128,7 @@ func main() {
 	var a int
 	var l []int
 	r := bufio.NewReader(os.Stdin)
-	//w := bufio.NewWriter(os.Stdout)
+	w := bufio.NewWriter(os.Stdout)
 	for {
 		_, err := fmt.Fscan(r, &a)
 		if err == io.EOF {
@@ -143,10 +143,10 @@ func main() {
 	elapsed := time.Since(start)
 	fmt.Println("Classic QuickSort time used: ", elapsed)
 	start = time.Now()
-	Pqsort(ll)
+	Psort(ll)
 	elapsed = time.Since(start)
 	fmt.Println("Parallel QuickSort time used: ", elapsed)
-	//fmt.Fprintln(w, l)
-	//w.Flush()
+	fmt.Fprintln(w, l)
+	w.Flush()
 
 }
