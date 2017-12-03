@@ -170,7 +170,7 @@ class LinkList<E extends ListNode<E>> implements Iterable<E>{
         }
     }
     void printList() {
-        ArrayList<E> l = new ArrayList<E>();
+        List<E> l = new ArrayList<E>();
         Iterator<E> iter = this.iterator();
         iter.forEachRemaining(l::add);
         System.out.println(l);
@@ -193,7 +193,7 @@ public class IntrusiveList{
         Slist<Integer> e = new Slist<Integer>(0);
         L.add(e);
         Integer[] data = {1,2,3,4,5,6,4,0,5,2,8,9};
-        ArrayList<Integer> l = new ArrayList<Integer>(Arrays.asList(data));
+        List<Integer> l = new ArrayList<Integer>(Arrays.asList(data));
         for (int i : l.subList(0, l.size() / 2)) {
             L.add(new Slist<Integer>(i));
         }
@@ -206,7 +206,7 @@ public class IntrusiveList{
         L.remove(e);
         L.printList();
         System.out.println(String.format("first = %s last = %s length = %d",L.getFirst(),L.getLast(),L.length()));
-        ArrayList<Integer> nl = new ArrayList<>();
+        List<Integer> nl = new ArrayList<>();
         Iterable<Slist> iterable = L::iterator;
         Stream<Slist> ls = StreamSupport.stream(iterable.spliterator(),false);
         ls.mapToInt(i -> Integer.parseInt(i.toString()))
